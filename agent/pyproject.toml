@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "agent"
+version = "0.1.0"
+description = ""
+authors = ["benvarian <88700858+benvarian@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+gym-super-mario-bros = "^7.4.0"
+torchvision = "^0.15.2"
+torchaudio = "^2.0.2"
+shimmy = "1.1.0"
+nes-py = "^8.2.1"
+torch = "^2.0.1"
+stable-baselines3 = {extras = ["extra"], version = "^2.1.0"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
