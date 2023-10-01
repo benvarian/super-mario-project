@@ -37,18 +37,22 @@ class TrainAndLogg(BaseCallback):
         super(TrainAndLogg, self).__init__(verbose)
         self.check_freq = check_freq
         self.save_path = save_path
+        self.data = []
 
     def _init_callback(self):
         if self.save_path is not None:
             os.makedirs(self.save_path, exist_ok=True)
 
     def _on_step(self):
+        state, reward, done, info = env.step([5])
+        self.data.append((done, info))
         if self.n_calls % self.check_freq == 0:
             self.model.save(
                 os.path.join(self.save_path, f"rl_model_{self.n_calls}.zip")
             )
+            with open(f"info_model_{self.n_calls}.txt", "w") as file:
+                file.write(str(self.data))
         return True
-
 
 CHECK_DIR = "./train"
 LOG_DIR = "./logs"
@@ -71,14 +75,14 @@ state, reward, done, info = env.step([5])
 # plt.show()
 
 
-callback = TrainAndLogg(check_freq=10000, save_path=CHECK_DIR)
+callback = TrainAndLogg(check_freq=512, save_path=CHECK_DIR)
 
 model = PPO(
     "CnnPolicy",
     env,
     verbose=1,
     tensorboard_log=LOG_DIR,
-    learning_rate=0.000001,
+    learning_rate=0.0003,
     n_steps=512,
 )
 model.learn(total_timesteps=100000, callback=callback)
