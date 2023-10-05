@@ -16,7 +16,7 @@ state_space = (80, 88, 1)
 
 dqn = DQNAgent(state_space, action_space)
 
-dqn.load("artifacts/model.h5")
+dqn.load("artifacts/model_1.h5")
 
 total_reward = 0
 while True:

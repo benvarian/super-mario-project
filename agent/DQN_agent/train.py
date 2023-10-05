@@ -13,8 +13,10 @@ env = JoypadSpace(env, RIGHT_ONLY)
 
 action_space = env.action_space.n
 state_space = (80, 88, 1)
-num_episodes = 1000000
-num_timesteps = 400000
+#num_episodes = 1000000
+#num_timesteps = 400000
+num_episodes = 5000000
+num_timesteps = 600000
 batch_size = 64
 DEBUG_LENGTH = 300
 
@@ -67,6 +69,6 @@ for i in range(num_episodes):
 
     dqn.update_epsilon(i)
     dqn.update_target_network()
-    dqn.save("artifacts/model.h5")
+    dqn.save("artifacts/model_1.h5")
 
 env.close()
