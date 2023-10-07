@@ -8,25 +8,26 @@ import random
 
 class DQNAgent:
     def __init__(self, state_size, action_size):
-        # Create variables for our agent
-        self.state_space = state_size
-        self.action_space = action_size
-        self.memory = deque(maxlen=5000)
-        self.gamma = 0.8
-        self.chosenAction = 0
+        # Store memory of agent
+        self.state_space = state_size # Stores the size of the state space; the input dimensions
+        self.action_space = action_size # Stores the number of possible actions
+        self.memory = deque(maxlen=5000) # Used for experiene replay; this (1) decouples sequential experiences (2) ensures the model doesn't 'forget' prior learned experiences
+        self.gamma = 0.8 # The discount factor of rewards; a high gamma prioritises longer term rewards
+        self.chosenAction = 0 # Action agent chooses
 
-        # Exploration vs explotation
-        self.epsilon = 0.1
-        self.max_epsilon = 1
-        self.min_epsilon = 0.01
-        self.decay_epsilon = 0.0001
+        # Control exploration vs exploitation behaviour
+        self.epsilon = 0.1 # Exploration rate: probability of taking random action; to change over time
+        self.max_epsilon = 1 # Exploration rate at beginning
+        self.min_epsilon = 0.01 # Agent should always have some exploration
+        self.decay_epsilon = 0.0001 # The rate epsilon decays over time; exploration should occur less as time goes on
 
         # Building Neural Networks for Agent
-        self.main_network = self.build_network()
-        self.target_network = self.build_network()
+        self.main_network = self.build_network() # Responsible for learning and updating Q-values
+        self.target_network = self.build_network() # Responsible for maintainiing stable Q-values
         self.update_target_network()
 
     def build_network(self):
+        '''Method to build the artificial neural network'''
         model = Sequential()
         model.add(
             Conv2D(64, (4, 4), strides=4, padding="same", input_shape=self.state_space)
@@ -37,7 +38,7 @@ class DQNAgent:
         model.add(Activation("relu"))
 
         model.add(Conv2D(64, (3, 3), strides=1, padding="same"))
-        model.add(Activation("relu"))
+        model.add(Activation("relu")) # Flatten into 1D vector for processing
         model.add(Flatten())
 
         model.add(Dense(512, activation="relu"))
@@ -49,6 +50,7 @@ class DQNAgent:
         return model
 
     def update_target_network(self):
+        '''Method to update target network with the modified main network'''
         self.target_network.set_weights(self.main_network.get_weights())
 
     def act(self, state, onGround):
