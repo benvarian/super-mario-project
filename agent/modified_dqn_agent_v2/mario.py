@@ -19,8 +19,8 @@ class MarioAgent:
         # Control exploration vs exploitation behaviour
         self.epsilon = 1 # Exploration rate: probability of taking random action; to change over time
         self.max_epsilon = 1 # Exploration rate at beginning
-        self.min_epsilon = 0.03 # Agent should always have some exploration
-        self.decay_epsilon = 0.0003 # The rate epsilon decays over time; exploration should occur less as time goes on
+        self.min_epsilon = 0.01 # Agent should always have some exploration
+        self.decay_epsilon = 0.0001 # The rate epsilon decays over time; exploration should occur less as time goes on
 
         # Building Neural Networks for Agent
         self.main_network = self.create_network() # Responsible for learning and updating Q-values
