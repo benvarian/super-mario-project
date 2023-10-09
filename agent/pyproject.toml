@@ -16,6 +16,11 @@ torch = "^2.0.1"
 stable-baselines3 = {extras = ["extra"], version = "^2.1.0"}
 
 
+[[tool.poetry.source]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cu117"
+priority = "explicit"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
