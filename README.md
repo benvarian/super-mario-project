@@ -21,8 +21,21 @@ Once you have poetry installed you can run the following commands to get the pro
 Now that a virtual environment has been created and all the dependencies have been installed you can run the following command to run the project. 
 
 <!-- todo change to the file where the model gets loaded -->
+To run the PPO model navigate into the agent folder, then agent again and run the following command.
 
-``` bash
-    poetry run python <file>.py
+```bash
+    poetry run python3 <or python> model.py
+```
+
+This will load our final model up and will run through all the actions that it has saved.
+
+The next agent is a deep q learning agent. To run this agent navigate into the agent folder, then modified_dqn_agent_v2 again and run the following command.
+
+### TODO
+-  CHANGE WHEN WE FINAL SUBMIT
+-  update the actual file to run  
+
+```bash
+    poetry run python3 <or python> dqn.py
 ```
 
