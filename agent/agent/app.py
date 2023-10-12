@@ -1,16 +1,6 @@
-# Install pytorch
-# poetry add torch torchvision torchaudio
-# install stable baselines for RL algorithm
-# poetry add stable-baselines3[extra]
-# pip3 install stable-baselines --use-deprecated=backtrack-on-build-failures
-# poetry add  stable-baselines3[extra]
-
-# https://stackoverflow.com/questions/73195438/openai-gyms-env-step-what-are-the-values
-
-# new
 import gym_super_mario_bros
 from nes_py.wrappers import JoypadSpace
-from gym_super_mario_bros.actions import SIMPLE_MOVEMENT
+from gym_super_mario_bros.actions import SIMPLE_MOVEMENT, RIGHT_ONLY
 from gym.wrappers import frame_stack, GrayScaleObservation
 from stable_baselines3.common.vec_env import VecFrameStack, DummyVecEnv
 from matplotlib import pyplot as plt
@@ -28,7 +18,6 @@ env = JoypadSpace(env, SIMPLE_MOVEMENT)
 env = GrayScaleObservation(env, keep_dim=True)
 env = DummyVecEnv([lambda: env])
 env = VecFrameStack(env, 4, channels_order="last")
-# check_env(env)
 
 
 # done = True
@@ -45,7 +34,7 @@ class TrainAndLogg(BaseCallback):
     def _on_step(self):
         if self.n_calls % self.check_freq == 0:
             self.model.save(
-                os.path.join(self.save_path, f"rl_model_{self.n_calls}.zip")
+                os.path.join(self.save_path, f"rl_model_PPO25_{self.n_calls}.zip")
             )
         return True
 
@@ -70,15 +59,18 @@ state, reward, done, info = env.step([5])
 #     plt.imshow(state[0][:, :, idx])
 # plt.show()
 
+model_old = PPO.load("./train/rl_model_10000000.zip")
 
-callback = TrainAndLogg(check_freq=10000, save_path=CHECK_DIR)
-
-model = PPO(
-    "CnnPolicy",
-    env,
-    verbose=1,
-    tensorboard_log=LOG_DIR,
-    learning_rate=0.000001,
-    n_steps=512,
-)
-model.learn(total_timesteps=100000, callback=callback)
+callback = TrainAndLogg(check_freq=100000, save_path=CHECK_DIR)
+# change model_old to simply model and youll have a new model to train
+# model = PPO(
+#     "CnnPolicy",
+#     env,
+#     verbose=1,
+#     tensorboard_log=LOG_DIR,
+#     learning_rate=0.00004,
+#     n_steps=1024,
+# )
+model_old.set_env(env)
+# model_old.learn(total_timesteps=10000000, callback=callback)
+model_old.learn(total_timesteps=6000000, callback=callback)
