@@ -13,7 +13,7 @@ action_space = env.action_space.n
 state_space = (80, 88, 1)
 dqn = MarioAgent(state_space, action_space)
 
-dqn.load_agent("artifacts/model_1.h5")
+dqn.load_agent("train/model_1.h5")
 
 LAST_WORLD_X_Y = [(0, 0)] * 30
 
