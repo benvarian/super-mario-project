@@ -1,9 +1,8 @@
 import gym_super_mario_bros
 from nes_py.wrappers import JoypadSpace
 from gym_super_mario_bros.actions import SIMPLE_MOVEMENT
-from gym.wrappers import frame_stack, GrayScaleObservation
+from gym.wrappers import GrayScaleObservation
 from stable_baselines3.common.vec_env import VecFrameStack, DummyVecEnv
-from matplotlib import pyplot as plt
 from stable_baselines3 import PPO
 
 JoypadSpace.reset = lambda self, **kwargs: self.env.reset(**kwargs)
@@ -14,10 +13,11 @@ env = JoypadSpace(env, SIMPLE_MOVEMENT)
 env = GrayScaleObservation(env, keep_dim=True)
 env = DummyVecEnv([lambda: env])
 env = VecFrameStack(env, 4, channels_order="last")
-
+# load up the PPO model from a file 
+# please refer to README.md if you are having problems with this
 model = PPO.load("./train/rl_model.zip")
 
-
+# loop through all of the available actions and render it to the env
 obs = env.reset()
 done = False
 while not done:
