@@ -1,8 +1,8 @@
 # Super Mario Project
 
 ## Group members 
-- Benjamin Varian - 23215049
-- Crystal Teh - 23209088
+- Benjamin Varian - 23215049, [Email Ben](mailto:23215049@student.uwa.edu.au)
+- Crystal Teh - 23209088, [Email Crystal](mailto:23209088@student.uwa.edu.au)
 
 ## Project Overview 
 In this project, you will develop AI agents to control the iconic character Mario in the classic game Super Mario Bros using the gym-super-mario-bros environment. The main objective is to implement at least two distinct AI algorithms/methods and compare their performance, strengths, and weaknesses in the context of playing the game.
@@ -20,22 +20,48 @@ Once you have poetry installed you can run the following commands to get the pro
 
 Now that a virtual environment has been created and all the dependencies have been installed you can run the following command to run the project. 
 
-<!-- todo change to the file where the model gets loaded -->
-To run the PPO model navigate into the agent folder, then agent again and run the following command.
+## PPO Agent
+**It is worth noting that with the gym version of anything less than 0.26.0 means this agent wont run, so if there is any errors please test with the version of gym been > 0.26.0.** To update the package please run:
 
-```bash
-    poetry run python3 <or python> model.py
+```bash 
+    poetry add gym==0.26.0
 ```
 
-This will load our final model up and will run through all the actions that it has saved.
-
-The next agent is a deep q learning agent. To run this agent navigate into the agent folder, then modified_dqn_agent_v2 again and run the following command.
-
-### TODO
--  CHANGE WHEN WE FINAL SUBMIT
--  update the actual file to run  
-
+For the next file to work, please make sure that you have downloaded our model from [here](https://uniwa-my.sharepoint.com/:u:/g/personal/23215049_student_uwa_edu_au/Ecg7bZjBptNGkPNCi4KZ-L8BQ6uSE7T252DRSeIkm-e46A?e=30OPvC) or [here](https://drive.google.com/file/d/1Tk-wObTZvUFX92BJvWBmJLneVnSg_3zw/view?usp=sharing) and place it in the train folder located inside agent. To run the PPO model navigate into the agent folder, then agent again and run the following command.
 ```bash
-    poetry run python3 <or python> dqn.py
+    poetry run python3 analyse.py
 ```
 
+If there are any problems with the downloading process of our model please reach out as we understand the importance of running this file.
+
+## DQN Agents
+**Please note: to run this DQN agent we need a different gym version from what we used in the PPO agent. It has been tested thoroughly on version 0.23.1.** To update please run:
+``` bash
+    poetry add gym==0.23.1
+```
+The next agent is the DQN agent. To run this agent navigate back into the agent folder, then DQN Agents and run the following command.
+
+```bash
+    poetry run python3 run_mario.py
+```
+This will firstly run through the model that has been trained and perform the actions that it has saved. Once it has finished running through the model it will then start training the model again. You can exit out of the program once this occurs.
+
+## Rule Based Agents
+
+**Please note: to run these rule based agents need a different gym version from what we used in the DQN agent. It has been tested thoroughly on version 0.26.0.** To update please run:
+``` bash
+    poetry add gym==0.26.0
+```
+
+To run our rule based agents we will be demoing the v2 and v3 versions. To run these please run the following commands:
+
+```bash
+    poetry run python3 rule_based_v2.py
+    poetry run python3 rule_based_v3.py
+```
+
+## Problems 
+
+If there are any problems with versioning and applying api compatability, please make sure that you have the correct version of gym installed.
+
+If issues persist please use the links at the top of the readme to contact us.
