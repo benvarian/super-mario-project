@@ -75,12 +75,12 @@ image_files = {
             "mario_locate_objects/block3.png",
             "mario_locate_objects/block4.png",
         ],
-        "mario_locate_objects/question_block": [
+        "question_block": [
             "mario_locate_objects/questionA.png",
             "mario_locate_objects/questionB.png",
             "mario_locate_objects/questionC.png",
         ],
-        "mario_locate_objects/pipe": [
+        "pipe": [
             "mario_locate_objects/pipe_upper_section.png",
             "mario_locate_objects/pipe_lower_section.png",
         ],
@@ -101,6 +101,8 @@ image_files = {
 
 def _get_template(filename):
     image = cv.imread(filename)
+    if image is not None:
+        print("FOUDNIMAGE")
     assert image is not None, f"File {filename} does not exist."
     template = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
     mask = np.uint8(np.where(np.all(image == MASK_COLOUR, axis=2), 0, 1))
