@@ -14,12 +14,12 @@ shimmy = "1.1.0"
 nes-py = "^8.2.1"
 torch = "^2.0.1"
 stable-baselines3 = {extras = ["extra"], version = "^2.1.0"}
-gym = "0.23.1"
+gym = "0.26.2"
 matplotlib = "^3.8.0"
 tensorflow = {version = "^2.14.0", markers = "sys_platform != 'darwin'"}
-tensorflow-io-gcs-filesystem = "0.31.0"
-tensorflow-macos = {version = "^2.14.0", markers = "sys_platform == 'darwin'"}
-tensorflow-metal = {version = "^1.1.0", markers = "sys_platform == 'darwin'"}
+tensorflow-macos = "^2.14.0"
+tensorflow-metal = "^1.1.0"
+
 
 
 [[tool.poetry.source]]
