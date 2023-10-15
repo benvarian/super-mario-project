@@ -44,7 +44,7 @@ The next agent is the DQN agent. To run this agent navigate back into the agent 
 ```bash
     poetry run python3 run_mario.py
 ```
-This will firstly run through the model that has been trained and perform the actions that it has saved. Once it has finished running through the model it will then start training the model again. You can exit out of the program once this occurs.
+This will firstly run through the model that has been trained and perform the actions that it has saved.
 
 ## Rule Based Agents
 
