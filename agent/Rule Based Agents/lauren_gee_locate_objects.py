@@ -101,8 +101,6 @@ image_files = {
 
 def _get_template(filename):
     image = cv.imread(filename)
-    if image is not None:
-        print("FOUDNIMAGE")
     assert image is not None, f"File {filename} does not exist."
     template = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
     mask = np.uint8(np.where(np.all(image == MASK_COLOUR, axis=2), 0, 1))
